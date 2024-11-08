@@ -1,0 +1,22 @@
+{
+    "name": "sistema42/melhor-envio-api",
+    "description": "Library for easy integration with the Melhor Envio API",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "8.0.x-dev",
+        "guzzlehttp/psr7": "2.7.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sistema42\\MelhorEnvioApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Samuel Teixeira",
+            "email": "samuel.itsl@live.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
