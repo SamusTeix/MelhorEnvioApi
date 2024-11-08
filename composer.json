@@ -3,8 +3,8 @@
     "description": "Library for easy integration with the Melhor Envio API",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "7.9.2",
-        "guzzlehttp/psr7": "2.7.0"
+        "guzzlehttp/guzzle": "6.5.8",
+        "guzzlehttp/psr7": "1.9.0"
     },
     "license": "MIT",
     "autoload": {
