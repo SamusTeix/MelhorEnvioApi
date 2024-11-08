@@ -18,4 +18,5 @@
             "email": "samuel.itsl@live.com"
         }
     ],
+    "minimum-stability": "stable"
 }
