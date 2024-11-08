@@ -4,7 +4,7 @@ namespace Sistema42\Controllers;
 
 use Sistema42\Services\UserService;
 
-class AgenciesController {
+class UserController {
     public function __construct(private readonly UserService $service) {}
 
     public function info() : string
