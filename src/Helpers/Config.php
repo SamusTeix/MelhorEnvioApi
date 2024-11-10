@@ -4,12 +4,43 @@ namespace Sistema42\MelhorEnvioApi\Helpers;
 
 abstract class Config {
     static $url;
-    static $email;
-    static $token;
-    static $clientId;
-    static $clientSecret;
-    static $redirectUrl;
-    static $refreshToken;
+    static $envValues;
+
+    const ENV_VARIABLES = [
+        'ENV',
+        'MELHOR_ENVIO_URL_PROD',
+        'MELHOR_ENVIO_URL_SANDBOX',
+        'MELHOR_ENVIO_EMAIL',
+        'MELHOR_ENVIO_TOKEN',
+        'MELHOR_ENVIO_CLIENT_ID',
+        'MELHOR_ENVIO_CLIENT_SECRET',
+        'MELHOR_ENVIO_REDIRECT_URL',
+        'MELHOR_ENVIO_REFRESH_TOKEN',
+    ];
+
+    public static function setEnvValues() : void
+    {
+        if (empty(self::$envValues)) {
+            foreach(self::ENV_VARIABLES as $fieldVar) {
+                // by getenv() function
+                if (! empty(getenv($fieldVar))) {
+                    self::$envValues[$fieldVar] = getenv($fieldVar);
+                    continue;
+                }
+
+                // by ENV() function
+                if (! empty(ENV($fieldVar))) {
+                    self::$envValues[$fieldVar] = ENV($fieldVar);
+                    continue;
+                }
+            }
+        }
+    }
+
+    public static function getEnvValue($fieldVar) : mixed
+    {
+        return empty(self::$envValues[$fieldVar]) ? false : self::$envValues[$fieldVar];
+    }
 
     public static function getUrl() : string
     {
@@ -17,78 +48,39 @@ abstract class Config {
             return self::$url;
         }
 
-        $devUrl = getenv('MELHOR_ENVIO_URL_SANDBOX') ?? 'sandbox.melhorenvio.com.br';
-        $prodUrl = getenv('MELHOR_ENVIO_URL_PROD') ?? 'melhorenvio.com.br';
-
-        self::$url = getenv('ENV') === 'prod' ? $prodUrl : $devUrl;
+        self::$url = self::getEnvValue('ENV') === 'prod' ? self::getEnvValue('MELHOR_ENVIO_URL_PROD') : self::getEnvValue('MELHOR_ENVIO_URL_SANDBOX');
 
         return self::$url;
     }
 
     public static function getEmail() : string
     {
-        if (! empty(self::$email)) {
-            return self::$email;
-        }
-
-        self::$email = getenv('MELHOR_ENVIO_EMAIL');
-
-        return self::$email;
+        return self::getEnvValue('MELHOR_ENVIO_EMAIL');
     }
 
     public static function getToken() : string
     {
-        if (! empty(self::$token)) {
-            return self::$token;
-        }
-
-        self::$token = getenv('MELHOR_ENVIO_TOKEN');
-
-        return self::$token;
+        return self::getEnvValue('MELHOR_ENVIO_TOKEN');
     }
 
     public static function getClientId() : string
     {
-        if (! empty(self::$clientId)) {
-            return self::$clientId;
-        }
-
-        self::$clientId = getenv('MELHOR_ENVIO_CLIENT_ID');
-
-        return self::$clientId;
+        return self::getEnvValue('MELHOR_ENVIO_CLIENT_ID');
     }
 
     public static function getClientSecret() : string
     {
-        if (! empty(self::$clientSecret)) {
-            return self::$clientSecret;
-        }
-
-        self::$clientSecret = getenv('MELHOR_ENVIO_CLIENT_SECRET');
-
-        return self::$clientSecret;
+        return self::getEnvValue('MELHOR_ENVIO_CLIENT_SECRET');
     }
 
     public static function getRedirectUrl() : string
     {
-        if (! empty(self::$redirectUrl)) {
-            return self::$redirectUrl;
-        }
-
-        self::$redirectUrl = getenv('MELHOR_ENVIO_REDIRECT_URL');
-
-        return self::$redirectUrl;
+        return self::getEnvValue('MELHOR_ENVIO_REDIRECT_URL');
     }
 
     public static function getRefreshToken() : string
     {
-        if (! empty(self::$refreshToken)) {
-            return self::$refreshToken;
-        }
-
-        self::$refreshToken = getenv('MELHOR_ENVIO_REFRESH_TOKEN');
-
-        return self::$refreshToken;
+        return self::getEnvValue('MELHOR_ENVIO_REFRESH_TOKEN');
     }
 
     public static function getUserAgentHeader() : array
