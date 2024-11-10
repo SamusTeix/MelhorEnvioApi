@@ -11,12 +11,12 @@ final class UserService {
     const URL_ME = '/api/v2/me';
     const URL_COMPANIES = '/api/v2/me/companies';
 
-    public function info() : string
+    public function info($validateCredentials = false) : string
     {
         $url = Config::getUrl() . self::URL_ME;
         $headers = Config::getAcceptAuthUserAgentHeader();
 
-        return $this->_get($url, $headers);
+        return $this->_get($url, $headers, [], $validateCredentials);
     }
 
     public function addresses() : string

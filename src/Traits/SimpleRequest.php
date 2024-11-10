@@ -24,7 +24,7 @@ trait SimpleRequest {
             $error = "Error on request: " . json_encode([
                 'url' => $url,
                 'headers' => $headers,
-                'response' => $response->getBody(),
+                'response' => json_encode($response),
             ]);
 
             if ($errorReturn) {
@@ -51,7 +51,8 @@ trait SimpleRequest {
             $error = "Error on request: " . json_encode([
                 'url' => $url,
                 'headers' => $headers,
-                'response' => $response->getBody(),
+                'body' => $body,
+                'response' => json_encode($response),
             ]);
 
             if ($errorReturn) {
@@ -78,7 +79,8 @@ trait SimpleRequest {
             $error = "Error on request: " . json_encode([
                 'url' => $url,
                 'headers' => $headers,
-                'response' => $response->getBody(),
+                'body' => $body,
+                'response' => json_encode($response),
             ]);
 
             if ($errorReturn) {
