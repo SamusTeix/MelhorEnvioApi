@@ -28,7 +28,7 @@ trait SimpleRequest {
             ]);
 
             if ($errorReturn) {
-                return ['error' => $error];
+                return json_encode(['error' => $error]);
             }
 
             throw new Exception($error);
@@ -56,7 +56,7 @@ trait SimpleRequest {
             ]);
 
             if ($errorReturn) {
-                return ['error' => $error];
+                return json_encode(['error' => $error]);
             }
 
             throw new Exception($error);
@@ -84,7 +84,7 @@ trait SimpleRequest {
             ]);
 
             if ($errorReturn) {
-                return ['error' => $error];
+                return json_encode(['error' => $error]);
             }
 
             throw new Exception($error);
