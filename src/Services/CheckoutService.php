@@ -15,9 +15,9 @@ final class CheckoutService {
         $url = Config::getUrl() . self::URL;
         $headers = Config::getPostHeader();
 
-        $body = [ 'body' => [
+        $body = [
             'orders' => $data['orders'],
-        ]];
+        ];
 
         return $this->_post($url, $headers, $body);
     }

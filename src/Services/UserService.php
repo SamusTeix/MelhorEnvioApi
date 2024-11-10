@@ -38,11 +38,9 @@ final class UserService {
     public function addFunds(array $data) : string
     {
         $body = [
-            'body' => [
-                'gateway' => $data['gateway'],
-                'redirect' => $data['redirect'],
-                'value' => $data['value'],
-            ],
+            'gateway' => $data['gateway'],
+            'redirect' => $data['redirect'],
+            'value' => $data['value'],
         ];
 
         $url = Config::getUrl() . self::URL_ME . '/balance';
@@ -70,14 +68,12 @@ final class UserService {
     public function addCompany(array $data) : string
     {
         $body = [
-            'body' => [
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'description' => $data['description'],
-                'company_name' => $data['company_name'],
-                'document' => $data['document'],
-                'state_register' => $data['state_register'],
-            ],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'description' => $data['description'],
+            'company_name' => $data['company_name'],
+            'document' => $data['document'],
+            'state_register' => $data['state_register'],
         ];
 
         $url = Config::getUrl() . self::URL_COMPANIES;
@@ -97,14 +93,12 @@ final class UserService {
     public function addCompanyAddress(string $id, array $data) : string
     {
         $body = [
-            'body' => [
-                'postal_code' => $data['postal_code'],
-                'address' => $data['address'],
-                'number' => $data['number'],
-                'complement' => $data['complement'],
-                'city' => $data['city'],
-                'state' => $data['state'],
-            ],
+            'postal_code' => $data['postal_code'],
+            'address' => $data['address'],
+            'number' => $data['number'],
+            'complement' => $data['complement'],
+            'city' => $data['city'],
+            'state' => $data['state'],
         ];
 
         $url = Config::getUrl() . self::URL_COMPANIES . '/' . $id . '/addresses';
@@ -124,10 +118,8 @@ final class UserService {
     public function addCompanyPhone(string $id, array $data) : string
     {
         $body = [
-            'body' => [
-                'type' => $data['type'],
-                'phone' => $data['phone'],
-            ],
+            'type' => $data['type'],
+            'phone' => $data['phone'],
         ];
 
         $url = Config::getUrl() . self::URL_COMPANIES . '/' . $id . '/phones';

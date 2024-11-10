@@ -135,43 +135,35 @@ abstract class Config {
     public static function getUserAgentHeader() : array
     {
         return [
-            'headers' => [
-                'User-Agent' => 'Aplicação ' . self::getEmail(),
-            ],
+            'User-Agent' => self::getEmail(),
         ];
     }
 
     public static function getAcceptAuthUserAgentHeader() : array
     {
         return [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . self::getToken(),
-                'User-Agent' => 'Aplicação ' . self::getEmail(),
-            ],
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . self::getToken(),
+            'User-Agent' => self::getEmail(),
         ];
     }
 
     public static function getAcceptContentTypeUserAgentHeader() : array
     {
         return [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'User-Agent' => 'Aplicação ' . self::getEmail(),
-            ],
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'User-Agent' => self::getEmail(),
         ];
     }
 
     public static function getPostHeader() : array
     {
         return [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . self::getToken(),
-                'User-Agent' => 'Aplicação ' . self::getEmail(),
-            ],
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . self::getToken(),
+            'User-Agent' => self::getEmail(),
         ];
     }
 }

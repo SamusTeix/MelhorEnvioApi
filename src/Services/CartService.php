@@ -28,7 +28,7 @@ final class CartService {
 
     public function create(array $data) : string
     {
-        $body = [ 'body' => [
+        $body = [
             'service' => $data['service'],
             'agency' => $data['agency'] ?? '',
             'from' => $data['from'],
@@ -36,7 +36,7 @@ final class CartService {
             'products' => $data['products'],
             'volumes' => $data['volumes'],
             'options' => $data['options'],
-        ]];
+        ];
 
         $url = Config::getUrl() . self::URL;
         $headers = Config::getPostHeader();

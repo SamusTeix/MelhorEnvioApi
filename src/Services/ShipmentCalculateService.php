@@ -33,13 +33,11 @@ final class ShipmentCalculateService {
     private function getByProduct($data) : string
     {
         $data = [
-            'body' => [
-                'from' => ['postal_code' => $data['from']],
-                'to' => ['postal_code' => $data['to']],
-                'products' => $data['products'],
-                'options' => $data['options'] ?? [],
-                'services' => $data['services'] ?? '',
-            ],
+            'from' => ['postal_code' => $data['from']],
+            'to' => ['postal_code' => $data['to']],
+            'products' => $data['products'],
+            'options' => $data['options'] ?? [],
+            'services' => $data['services'] ?? '',
         ];
 
         return $this->_post($this->url, $this->headers, $data);
@@ -48,13 +46,11 @@ final class ShipmentCalculateService {
     private function getByPackage($data) : string
     {
         $data = [
-            'body' => [
-                'from' => ['postal_code' => $data['from']],
-                'to' => ['postal_code' => $data['to']],
-                'package' => $data['package'],
-                'options' => $data['options'] ?? [],
-                'services' => $data['services'] ?? '',
-            ],
+            'from' => ['postal_code' => $data['from']],
+            'to' => ['postal_code' => $data['to']],
+            'package' => $data['package'],
+            'options' => $data['options'] ?? [],
+            'services' => $data['services'] ?? '',
         ];
 
         return $this->_post($this->url, $this->headers, $data);

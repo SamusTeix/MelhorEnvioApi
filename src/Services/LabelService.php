@@ -33,9 +33,9 @@ final class LabelService {
 
     public function create(array $data) : string
     {
-        $body = [ 'body' => [
+        $body = [
             'orders' => $data,
-        ]];
+        ];
 
         $url = Config::getUrl() . self::URL_SHIPMENT . '/generate';
         $headers = Config::getPostHeader();
@@ -45,11 +45,11 @@ final class LabelService {
 
     public function destroy(array $data) : string
     {
-        $body = [ 'body' => [
+        $body = [
             'id' => $data['id'],
             'reason_id' => '2',
             'description' => $data['description'],
-        ]];
+        ];
 
         $url = Config::getUrl() . self::URL_SHIPMENT . '/cancel';
         $headers = Config::getPostHeader();
@@ -77,9 +77,7 @@ final class LabelService {
     public function cancellable(array $data) : string
     {
         $body = [
-            'body' => [
-                'orders' => $data,
-            ],
+            'orders' => $data,
         ];
 
         $url = Config::getUrl() . self::URL_SHIPMENT . '/cancellable';
@@ -91,9 +89,7 @@ final class LabelService {
     public function preview(array $data) : string
     {
         $body = [
-            'body' => [
-                'orders' => $data['orders'],
-            ],
+            'orders' => $data['orders'],
         ];
 
         $url = Config::getUrl() . self::URL_SHIPMENT . '/preview';
@@ -105,10 +101,8 @@ final class LabelService {
     public function print(array $data) : string
     {
         $body = [
-            'body' => [
-                'mode' => $data['mode'] ?? '',
-                'orders' => $data['orders'],
-            ],
+            'mode' => $data['mode'] ?? '',
+            'orders' => $data['orders'],
         ];
 
         $url = Config::getUrl() . self::URL_SHIPMENT . '/print';
@@ -120,9 +114,7 @@ final class LabelService {
     public function tracking(array $data) : string
     {
         $body = [
-            'body' => [
-                'orders' => $data['orders'],
-            ],
+            'orders' => $data['orders'],
         ];
 
         $url = Config::getUrl() . self::URL_SHIPMENT . '/tracking';
