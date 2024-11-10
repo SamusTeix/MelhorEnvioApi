@@ -2,7 +2,7 @@
 
 namespace Sistema42\MelhorEnvioApi\Helpers;
 
-use Sistema42\MelhorEnvioApi\AppSettings;
+use Sistema42\MelhorEnvioApi\User;
 
 abstract class Config {  
     private static $url;
@@ -65,8 +65,8 @@ abstract class Config {
 
     private static function verifyConnection() : bool
     {
-        $appSettins = new AppSettings();
-        $conn = $appSettins->index();
+        $user = new User();
+        $conn = $user->info();
 
         if ($conn['error']) {
             return $conn['error'];
