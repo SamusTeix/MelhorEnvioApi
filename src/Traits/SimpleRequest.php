@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Throwable;
 
 trait SimpleRequest {
-    public function _get(string $url, array $headers, ?array $queryParams = []) : string
+    public function _get(string $url, array $headers, ?array $queryParams = [], $errorReturn = false) : string
     {
         try {
             if (count($queryParams)) {
@@ -21,11 +21,17 @@ trait SimpleRequest {
                 return $response->getBody();
             }
 
-            throw new Exception("Error on request: " . json_encode([
+            $error = "Error on request: " . json_encode([
                 'url' => $url,
                 'headers' => $headers,
                 'response' => $response->getBody(),
-            ]));
+            ]);
+
+            if ($errorReturn) {
+                return ['error' => $error];
+            }
+
+            throw new Exception($error);
         } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
         } catch (Throwable $e) {
@@ -33,7 +39,7 @@ trait SimpleRequest {
         }
     }
 
-    public function _post(string $url, array $headers, ?array $body = []) : string
+    public function _post(string $url, array $headers, ?array $body = [], $errorReturn = false) : string
     {
         try {
             $client = new Client();
@@ -42,11 +48,17 @@ trait SimpleRequest {
                 return $response->getBody();
             }
 
-            throw new Exception("Error on request: " . json_encode([
+            $error = "Error on request: " . json_encode([
                 'url' => $url,
                 'headers' => $headers,
                 'response' => $response->getBody(),
-            ]));
+            ]);
+
+            if ($errorReturn) {
+                return ['error' => $error];
+            }
+
+            throw new Exception($error);
         } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
         } catch (Throwable $e) {
@@ -54,7 +66,7 @@ trait SimpleRequest {
         }
     }
 
-    public function _delete(string $url, array $headers, ?array $body = []) : string
+    public function _delete(string $url, array $headers, ?array $body = [], $errorReturn = false) : string
     {
         try {
             $client = new Client();
@@ -63,11 +75,17 @@ trait SimpleRequest {
                 return $response->getBody();
             }
 
-            throw new Exception("Error on request: " . json_encode([
+            $error = "Error on request: " . json_encode([
                 'url' => $url,
                 'headers' => $headers,
                 'response' => $response->getBody(),
-            ]));
+            ]);
+
+            if ($errorReturn) {
+                return ['error' => $error];
+            }
+
+            throw new Exception($error);
         } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
         } catch (Throwable $e) {

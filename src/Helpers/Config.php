@@ -2,11 +2,13 @@
 
 namespace Sistema42\MelhorEnvioApi\Helpers;
 
-abstract class Config {
+use Sistema42\MelhorEnvioApi\AppSettings;
+
+abstract class Config {  
     static $url;
     static $envValues;
 
-    const ENV_VARIABLES = [
+    static $config = [
         'ENV',
         'MELHOR_ENVIO_URL_PROD',
         'MELHOR_ENVIO_URL_SANDBOX',
@@ -18,20 +20,67 @@ abstract class Config {
         'MELHOR_ENVIO_REFRESH_TOKEN',
     ];
 
-    public static function setEnvValues() : void
+    public static function config(array $values) : mixed
+    {
+        self::setEnvValues($values);
+
+        if (
+            empty(self::$envValues['ENV']) || 
+            empty(self::$envValues['MELHOR_ENVIO_URL_PROD']) || 
+            empty(self::$envValues['MELHOR_ENVIO_URL_SANDBOX'])
+        ) {
+            return ['error' => true, 'message' => 'Configs "ENV", "MELHOR_ENVIO_URL_PROD" and "MELHOR_ENVIO_URL_SANDBOX" are required'];
+        }
+
+        if (         
+            ! empty(self::$envValues['MELHOR_ENVIO_EMAIL']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_TOKEN'])
+        ) {
+            $isConfigured = self::verifyConnection();
+            if ($isConfigured === true) {
+                return ['success' => true];
+            }
+
+            return ['error' => true, 'message' => $isConfigured];
+        }
+
+        if (
+            ! empty(self::$envValues['MELHOR_ENVIO_EMAIL']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_CLIENT_ID']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_CLIENT_SECRET']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_REDIRECT_URL'])
+        ) {
+            return ['success' => 'partial', 'message' => 'Ready to get Bearer Token'];
+        }
+
+        if (
+            ! empty(self::$envValues['MELHOR_ENVIO_EMAIL']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_CLIENT_ID']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_CLIENT_SECRET']) && 
+            ! empty(self::$envValues['MELHOR_ENVIO_REFRESH_TOKEN'])
+        ) {
+            return ['success' => 'partial', 'message' => 'Ready to refresh Bearer Token'];
+        }
+    }
+
+    public static function verifyConnection() : bool
+    {
+        $appSettins = new AppSettings();
+        $conn = $appSettins->index();
+
+        if ($conn['error']) {
+            return $conn['error'];
+        }
+
+        return true;
+    }
+
+    public static function setEnvValues(array $values) : void
     {
         if (empty(self::$envValues)) {
-            foreach(self::ENV_VARIABLES as $fieldVar) {
-                // by getenv() function
-                if (! empty(getenv($fieldVar))) {
-                    self::$envValues[$fieldVar] = getenv($fieldVar);
-                    continue;
-                }
-
-                // by ENV() function
-                if (! empty(ENV($fieldVar))) {
-                    self::$envValues[$fieldVar] = ENV($fieldVar);
-                    continue;
+            foreach(self::$config as $fieldVar) {
+                if (! empty($values[$fieldVar])) {
+                    $envValues[$fieldVar] = $values[$fieldVar];
                 }
             }
         }
