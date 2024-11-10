@@ -1,9 +1,9 @@
 <?php
 
-namespace Sistema42\Services;
+namespace Sistema42\MelhorEnvioApi\Services;
 
-use Sistema42\Helpers\Config;
-use Sistema42\Traits\SimpleRequest;
+use Sistema42\MelhorEnvioApi\Helpers\Config;
+use Sistema42\MelhorEnvioApi\Traits\SimpleRequest;
 
 final class AppSettingsService {
     use SimpleRequest;

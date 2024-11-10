@@ -1,6 +1,6 @@
 <?php
 
-namespace Sistema42\Traits;
+namespace Sistema42\MelhorEnvioApi\Traits;
 
 use Exception;
 use GuzzleHttp\Client;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sistema42\Traits;
+namespace Sistema42\MelhorEnvioApi\Traits;
 
 trait CreateTrait {
     public function create(array $data = []) : string

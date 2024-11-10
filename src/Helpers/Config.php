@@ -1,6 +1,6 @@
 <?php
 
-namespace Sistema42\Helpers;
+namespace Sistema42\MelhorEnvioApi\Helpers;
 
 abstract class Config {
     static $url;

@@ -1,11 +1,14 @@
 <?php
 
-namespace Sistema42\Controllers;
+namespace Sistema42\MelhorEnvioApi;
 
-use Sistema42\Services\UserService;
+use Sistema42\MelhorEnvioApi\Services\UserService;
 
-class AgenciesController {
-    public function __construct(private readonly UserService $service) {}
+class User {
+    private $service;
+    public function __construct() {
+        $this->service = new UserService;
+    }
 
     public function info() : string
     {

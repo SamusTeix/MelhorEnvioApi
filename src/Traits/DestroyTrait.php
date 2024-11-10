@@ -1,6 +1,6 @@
 <?php
 
-namespace Sistema42\Traits;
+namespace Sistema42\MelhorEnvioApi\Traits;
 
 trait DestroyTrait {
     public function destroy(mixed $data) : string

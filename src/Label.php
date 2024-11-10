@@ -1,17 +1,20 @@
 <?php
 
-namespace Sistema42\Controllers;
+namespace Sistema42\MelhorEnvioApi;
 
-use Sistema42\Services\LabelService;
-use Sistema42\Traits\CreateTrait;
-use Sistema42\Traits\DestroyTrait;
-use Sistema42\Traits\IndexTrait;
-use Sistema42\Traits\ShowTrait;
+use Sistema42\MelhorEnvioApi\Services\LabelService;
+use Sistema42\MelhorEnvioApi\Traits\CreateTrait;
+use Sistema42\MelhorEnvioApi\Traits\DestroyTrait;
+use Sistema42\MelhorEnvioApi\Traits\IndexTrait;
+use Sistema42\MelhorEnvioApi\Traits\ShowTrait;
 
-class LabelController {
+class Label {
     use IndexTrait, ShowTrait, CreateTrait, DestroyTrait;
 
-    public function __construct(private readonly LabelService $service) {}
+    private $service;
+    public function __construct() {
+        $this->service = new LabelService();
+    }
 
     public function search(?array $data) : string
     {
