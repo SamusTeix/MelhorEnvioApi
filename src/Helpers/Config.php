@@ -66,7 +66,7 @@ abstract class Config {
 
     private static function verifyConnection() : bool
     {
-        $conn = (new UserService())->info(true);
+        $conn = json_decode((new UserService())->info(true));
         if ($conn['error']) {
             return $conn['error'];
         }
