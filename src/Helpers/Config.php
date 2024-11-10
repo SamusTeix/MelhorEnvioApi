@@ -5,10 +5,10 @@ namespace Sistema42\MelhorEnvioApi\Helpers;
 use Sistema42\MelhorEnvioApi\AppSettings;
 
 abstract class Config {  
-    static $url;
-    static $envValues;
+    private static $url;
+    private static $envValues;
 
-    static $config = [
+    private static $config = [
         'ENV',
         'MELHOR_ENVIO_URL_PROD',
         'MELHOR_ENVIO_URL_SANDBOX',
@@ -63,7 +63,7 @@ abstract class Config {
         }
     }
 
-    public static function verifyConnection() : bool
+    private static function verifyConnection() : bool
     {
         $appSettins = new AppSettings();
         $conn = $appSettins->index();
@@ -75,18 +75,18 @@ abstract class Config {
         return true;
     }
 
-    public static function setEnvValues(array $values) : void
+    private static function setEnvValues(array $values) : void
     {
         if (empty(self::$envValues)) {
-            foreach(self::$config as $fieldVar) {
-                if (! empty($values[$fieldVar])) {
-                    $envValues[$fieldVar] = $values[$fieldVar];
+            foreach($values as $key => $value) {
+                if (in_array($key, self::$config)) {
+                    self::$envValues[$key] = $value;
                 }
             }
         }
     }
 
-    public static function getEnvValue($fieldVar) : mixed
+    private static function getEnvValue($fieldVar) : mixed
     {
         return empty(self::$envValues[$fieldVar]) ? false : self::$envValues[$fieldVar];
     }
